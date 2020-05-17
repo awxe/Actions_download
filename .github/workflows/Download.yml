@@ -36,16 +36,16 @@ jobs:
    
     - name: Download file directory
       run: |
-        curl -o wire.dmg https://1.na.dl.wireshark.org/osx/Wireshark%203.2.3%20Intel%2064.dmg
+        curl -o lede https://github.com/awxe/Actions-lede/suites/689091144/artifacts/6478470
 
     - name: Upload firmware to cowtransfer
       run: |
         curl -fsSL git.io/file-transfer | sh
-        ./transfer cow --block 2621440 -s -p 64 --no-progress wire.dmg 2>&1 | tee cowtransfer.log
+        ./transfer cow --block 2621440 -s -p 64 --no-progress lede 2>&1 | tee cowtransfer.log
         echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
     
     - name: Upload firmware to WeTransfer
       run: |
         curl -fsSL git.io/file-transfer | sh
-        ./transfer wet -s -p 16 --no-progress wire.dmg 2>&1 | tee wetransfer.log
+        ./transfer wet -s -p 16 --no-progress lede 2>&1 | tee wetransfer.log
         echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
