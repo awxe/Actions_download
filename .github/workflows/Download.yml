@@ -36,17 +36,18 @@ jobs:
    
     - name: Download file directory
       run: |
-        curl -oL ledebin https://github.com/awxe/Actions-lede/suites/689091144/artifacts/6478470
+        #curl -oL ledebin https://github.com/awxe/Actions-lede/suites/689091144/artifacts/6478470
+        git clone https://github.com/awxe/Actions-lede/suites/689091144/artifacts/6478470
         ls -ah
         
     - name: Upload firmware to cowtransfer
       run: |
         curl -fsSL git.io/file-transfer | sh
-        ./transfer cow --block 2621440 -s -p 64 --no-progress ledebin 2>&1 | tee cowtransfer.log
+        ./transfer cow --block 2621440 -s -p 64 --no-progress lede_bin.zip 2>&1 | tee cowtransfer.log
         echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
     
     - name: Upload firmware to WeTransfer
       run: |
         curl -fsSL git.io/file-transfer | sh
-        ./transfer wet -s -p 16 --no-progress ledebin 2>&1 | tee wetransfer.log
+        ./transfer wet -s -p 16 --no-progress lede_bin 2>&1 | tee wetransfer.log
         echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
