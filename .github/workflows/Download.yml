@@ -36,8 +36,8 @@ jobs:
    
     - name: Download file directory
       run: |
-        curl -o ledebin https://github.com/awxe/Actions-lede/suites/689091144/artifacts/6478470
-        ls -a
+        curl -oL ledebin https://github.com/awxe/Actions-lede/suites/689091144/artifacts/6478470
+        ls -ah
         
     - name: Upload firmware to cowtransfer
       run: |
